@@ -33,6 +33,9 @@ todo-app/
 │   └── README.md
 ├── requirements.txt
 └── .gitignore
+└── Dockerfile.backend
+└── Dockerfile.frontend
+└── docker-compose.yml
 
 ```
 
