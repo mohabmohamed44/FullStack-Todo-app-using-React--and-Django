@@ -1,41 +1,33 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TaskView = ({ tasks, onDelete, onMarkCompleted }) => {
   return (
-    <div style={styles.container}>
-      <div style={styles.taskWrapper}>
-        <h2 style={styles.heading}>Task List</h2>
-        <ul style={styles.listGroup}>
+    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <div className="p-4 bg-white shadow rounded" style={{ maxWidth: "600px", width: "100%" }}>
+        <h2 className="mb-4 text-center">Task List</h2>
+        <ul className="list-group">
           {tasks.map((task) => (
             <li
               key={task.id}
-              style={{
-                ...styles.listGroupItem,
-                backgroundColor: task.completed ? "#28a745" : "white",
-                color: task.completed ? "white" : "black",
-              }}
+              className={`list-group-item d-flex justify-content-between align-items-center ${
+                task.completed ? 'bg-success text-white' : ''
+              }`}
             >
               <span
-                style={{
-                  ...styles.taskText,
-                  textDecoration: task.completed ? "line-through" : "none",
-                }}
+                className={`flex-grow-1 ${task.completed ? 'text-decoration-line-through' : ''}`}
               >
                 {task.task}
               </span>
-              <div style={styles.buttonGroup}>
+              <div className="btn-group" role="group" aria-label="Task actions">
                 <button
-                  style={
-                    task.completed
-                      ? styles.buttonSecondary
-                      : styles.buttonPrimary
-                  }
+                  className={`btn ${task.completed ? 'btn-secondary' : 'btn-primary'}`}
                   onClick={() => onMarkCompleted(task.id)}
                 >
                   {task.completed ? "Completed" : "Mark Complete"}
                 </button>
                 <button
-                  style={styles.buttonDanger}
+                  className="btn btn-danger"
                   onClick={() => onDelete(task.id)}
                 >
                   Delete
@@ -47,75 +39,6 @@ const TaskView = ({ tasks, onDelete, onMarkCompleted }) => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
-    backgroundColor: "#f8f9fa",
-  },
-  taskWrapper: {
-    padding: "20px",
-    backgroundColor: "white",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-    borderRadius: "8px",
-    width: "100%",
-    maxWidth: "600px",
-  },
-  heading: {
-    marginBottom: "20px",
-    fontSize: "24px",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  listGroup: {
-    padding: "0",
-    listStyle: "none",
-  },
-  listGroupItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px",
-    borderRadius: "5px",
-    marginBottom: "10px",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-  },
-  taskText: {
-    fontSize: "18px",
-    flex: 1,
-  },
-  buttonGroup: {
-    display: "flex",
-    gap: "10px",
-  },
-  buttonPrimary: {
-    padding: "5px 10px",
-    borderRadius: "5px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    cursor: "pointer",
-  },
-  buttonSecondary: {
-    padding: "5px 10px",
-    borderRadius: "5px",
-    backgroundColor: "#6c757d",
-    color: "white",
-    border: "none",
-    cursor: "pointer",
-  },
-  buttonDanger: {
-    padding: "5px 10px",
-    borderRadius: "5px",
-    backgroundColor: "#dc3545",
-    color: "white",
-    border: "none",
-    cursor: "pointer",
-  },
 };
 
 export default TaskView;
